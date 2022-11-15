@@ -200,7 +200,7 @@
                                         <p>Ph No: {{this.number}}</p>
 									</td>
 									<td class="column-2">
-										<input type="radio" id="addressId" name="addressId" value="{{this._id}}" required>
+										<input type="radio" id="addressId" name="addressId" class="adressclass" value="{{this._id}}" required>
 									</td>
 								</tr>
 								{{/each}}
@@ -227,7 +227,7 @@
 							Payment Methods
 						</h4>
 						<label class="radio">
-							<input class="radio" type="radio" id="paymentmethod" name="paymentmethod" onclick="toggle()" value="COD" placeholder="COD" required> COD
+							<input class="radio" type="radio" id="paymentmethod" name="paymentmethod" onclick="toggle()" value="COD" placeholder="COD"   required> COD
 						</label>
 						{{#if wallet_success}}
 						<label class="radio">
@@ -242,7 +242,7 @@
 						<input type="radio" id="paymentmethod" name="paymentmethod" value="RazorPay" onclick="toggle()" placeholder="RazorPay" required> Razorpay
 						</label>
 						<label class="radio">
-						<input type="radio" id="paymentmethod" name="paymentmethod" value="Paypal" onclick="toggle1()" placeholder="Paypal" required> Paypal
+						<input type="radio" id="paymentmethod" name="paymentmethod" value="Paypal" class="paypalclass" onclick="toggle1()" placeholder="Paypal" disabled required> Paypal
 						</label>
 						 <div class="btn clr" id="paypal-button-container"></div>
 					</div>
@@ -277,7 +277,18 @@
 		</span>
 	</div>
 
-
+	<script>
+		console.log(document.getElementById('paymentmethod'))
+		const l = document.querySelectorAll(".adressclass")
+		console.log(l)
+		let p = document.querySelector('.paypalclass')
+		
+	    for(var i =0;i< l.length;i++) {
+			l[i].onclick=() => {
+				p.disabled=false
+		}
+		}
+	</script>
 	{{!--
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
