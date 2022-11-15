@@ -5,6 +5,12 @@
     <center class="p-5"><a href="/admin/addproduct"><button class="btn btn-success">Add product</button></a></center>
     
     <div class="container">
+      {{!-- <center>
+        <form action="/admin/productsearch" method="post">
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Search</button>
+        </form>
+      </center> --}}
         <table class="table mt-5" id="myTable">
             <thead>
                 <tr>
@@ -122,4 +128,9 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 </style>
+<script>
+  if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
 

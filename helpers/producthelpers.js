@@ -104,7 +104,7 @@ module.exports ={
             if(productData.productoffer > 0) {
                 if(p.productoffer == productData.productoffer) {
                     productData.offerprice = p.offerprice
-                    productData.totalOffer = p.totalOffer
+                    productData.totalOffer = parseInt(p.totalOffer)
                     // offerprice = parseInt(p.offerprice.toFixed(0))
                 } else {
                     // offerprice = p.price - (p.price*(productData.productoffer/100))
@@ -117,7 +117,7 @@ module.exports ={
 
                     let ctotalOffer = p.totalOffer - parseInt(p.productoffer);
                     ctotalOffer = ctotalOffer + parseInt(productData.productoffer);
-                    productData.totalOffer = ctotalOffer
+                    productData.totalOffer = parseInt(ctotalOffer)
                 }
                 // productData.offerprice = offerprice;
             } else {
@@ -127,7 +127,7 @@ module.exports ={
                 uofferprice = parseInt(uofferprice.toFixed(0));
                 productData.offerprice = uofferprice;
                 let ctotalOffer = p.totalOffer - parseInt(p.productoffer);
-                productData.totalOffer = ctotalOffer
+                productData.totalOffer = parseInt(ctotalOffer)
             }
 
             let productId = productData.product_name+productData.brand_name+productData.category+productData.size+productData.color.trim()
@@ -234,9 +234,16 @@ module.exports ={
         })
     },
 
-    getFourLatesProduct: async function() {
-        return new Promise(function(resolve, reject) {
+    // getFourLatesProduct: async function() {
+    //     return new Promise(function(resolve, reject) {
             
+    //     })
+    // }
+    getProductSearch: function(query) {
+        return new Promise(function(resolve, reject) {
+            db.get().collection(collections.PRODUCT_COLLECTION).find({product_name: {$regex: query, $options: 'i'}}).toArray().then((response) => {
+                resolve(response);
+            })
         })
     }
 }

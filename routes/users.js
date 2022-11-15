@@ -133,7 +133,8 @@ router.get('/vieworderdetails', usercontrollers.getViewOrderDetails);
 
 router.get('/mywallet', usercontrollers.getMyWallet);
 
-router.get('/coupons', usercontrollers.getViewCoupons)
+router.get('/coupons', usercontrollers.getViewCoupons);
+
 
 // router.get('/')
 

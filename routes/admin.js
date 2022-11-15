@@ -227,6 +227,10 @@ router.get('/', async function (req, res, next) {
       // console.log(data);
       res.json(data)
     })
-  })
+  });
+
+  router.get('/productsearch', admincontrollers.postProductSearch)
+
+  router.post('/productsearch', admincontrollers.postProductSearch)
 
 module.exports = router;

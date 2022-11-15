@@ -437,5 +437,16 @@ module.exports = {
             console.log(products);
             res.render('admin/vieworderdetails', {admin: true, orderDetails, products})
         })
+    },
+
+    postProductSearch: function(req, res) {
+        let query = req.body.query;
+        if(query) {
+            producthelpers.getProductSearch(query).then((response) => {
+                res.render('admin/viewproducts', {admin:req.cookies.admintoken, products:true, product: response})
+            })
+        } else {
+            res.redirect('/admin/viewproducts')
+        }
     }
 }
