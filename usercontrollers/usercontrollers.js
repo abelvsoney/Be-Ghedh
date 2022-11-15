@@ -646,9 +646,10 @@ module.exports={
 
     getFilterByBrand:async function(req, res) {
         let token = req.cookies.token;
+        let wishlist;
         if(token) {
             let user = jwt.verify(token, process.env.USER_SECRET_KEY)
-            let wishlist =await wishlisthelpers.getProductsfromWishlist(user._id);
+            wishlist =await wishlisthelpers.getProductsfromWishlist(user._id);
         }
 
         let brands = await brandhelpers.getAllBrands()
@@ -663,7 +664,16 @@ module.exports={
         producthelpers.getAllProductsByBrand(req.query.bname).then((response) => {
             let products = response;
             products.forEach(element => {
-                if(element.price > element.offerprice){
+                if(wishlist) {
+                    wishlist.forEach(wish => {
+                        // console.log(wish.product._id.toString() == element._id.toString());
+                        if(wish.product._id.toString() == element._id.toString()) {
+                            // console.log("inside");
+                            element.wishlisted = true;
+                        }
+                    });
+                }
+                if (element.price > element.offerprice) {
                     element.offer = true
                 }
             });
@@ -673,8 +683,10 @@ module.exports={
 
     getFilterByCategory: async function(req, res) {
         let token = req.cookies.token;
+        let wishlist
         if(token) {
             let user = jwt.verify(token, process.env.USER_SECRET_KEY);
+            wishlist =await wishlisthelpers.getProductsfromWishlist(user._id);
         }
 
         let brands = await brandhelpers.getAllBrands()
@@ -682,6 +694,20 @@ module.exports={
         
         producthelpers.getAllProductsByBrand_Category(req.query.catid).then(async (resp) => {
             let products = resp.products;
+            products.forEach(element => {
+                if(wishlist) {
+                    wishlist.forEach(wish => {
+                        // console.log(wish.product._id.toString() == element._id.toString());
+                        if(wish.product._id.toString() == element._id.toString()) {
+                            // console.log("inside");
+                            element.wishlisted = true;
+                        }
+                    });
+                }
+                if (element.price > element.offerprice) {
+                    element.offer = true
+                }
+            });
             let currentbrand = resp.currentBrand;
             console.log(currentbrand);
             let categories =await categoryhelpers.getCategorybyBrand(currentbrand)
