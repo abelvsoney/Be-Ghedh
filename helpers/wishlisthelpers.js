@@ -36,7 +36,8 @@ module.exports = {
                         products: [proObj]
                     }
                     db.get().collection(collections.WISHLIST_COLLECTION).insertOne(cartObj).then((response) => {
-                        resolve(true);
+                        // console.log("heere111");
+                        resolve({status:true})
                     })
                 }
             } else {

@@ -478,10 +478,10 @@ module.exports={
         console.log("jjjj");
         let token = req.cookies.token;
         if(token) {
-            let user = jwt.verify(token, process.env.USER_SECRET_KEY);
+        let user = jwt.verify(token, process.env.USER_SECRET_KEY);
         console.log(req.params.proId)
         wishlisthelpers.addToWishlist(req.params.proId, user._id).then((response) => {
-            console.log("hii");
+            console.log(response);
             res.json(response)
         })
         } else {
