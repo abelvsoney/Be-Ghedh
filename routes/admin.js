@@ -134,7 +134,7 @@ router.post('/test', function(req, res) {
 
 router.get('/vieworderdetails', admincontrollers.getViewOrderDetails)
 
-router.get('/', async function (req, res, next) {
+router.get('/',adminauthentication.adminJWTTokenAuth, async function (req, res, next) {
     console.log("in dashboard");
     try {
       let total = 0
